@@ -1,5 +1,5 @@
 exports.verifyAdmin = (req, res, next) => {
-  console.log(req.body);
+  console.log(req.user);
 
   if (req.user.role !== "admin") {
     return res.status(403).json({ message: "Access Denied" });
@@ -8,6 +8,8 @@ exports.verifyAdmin = (req, res, next) => {
 };
 
 exports.verifyUser = (req, res, next) => {
+  console.log(req.body);
+
   if (req.user.role !== "user") {
     return res.status(403).json({ message: "Access Denied" });
   }
