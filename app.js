@@ -2,7 +2,7 @@ const express = require("express");
 const connectDB = require("./config/db");
 const passport = require("passport");
 const session = require("express-session");
-const rateLimit = require("./utils/rateLimit");
+const rateLimit = require("./utils/ratelimit");
 require("dotenv").config();
 require("./config/passport");
 const authRoutes = require("./routes/authRoutes");
