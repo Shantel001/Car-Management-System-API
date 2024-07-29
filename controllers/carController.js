@@ -33,6 +33,15 @@ exports.getCars = async (req, res) => {
   }
 };
 
+exports.getCarByUser = async (req, res) => {
+  try {
+    const cars = await Car.find({ user: req.params.userId });
+    res.json(cars);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 exports.getCarById = async (req, res) => {
   const { id } = req.params;
   try {

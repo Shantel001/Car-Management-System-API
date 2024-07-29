@@ -5,7 +5,7 @@ const session = require("express-session");
 const rateLimit = require("./utils/ratelimit");
 require("dotenv").config();
 require("./config/passport");
-const authRoutes = require("./routes/authRoutes");
+const authRoutes = require("./routes/userRoutes");
 const carRoutes = require("./routes/carRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
 
@@ -31,7 +31,7 @@ app.use(passport.session());
 // Routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/cars", carRoutes);
-app.use("/api/v1/review", reviewRoutes);
+app.use("/api/v1/reviews", reviewRoutes);
 
 app.get("/", (req, res) => {
   res.send("Welcome to Car Lot Management System");

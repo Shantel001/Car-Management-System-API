@@ -24,9 +24,9 @@ exports.addReview = async (req, res) => {
 };
 
 exports.getReviews = async (req, res) => {
-  const { id } = req.params;
   try {
-    const reviews = await Review.find({ car: id }).populate("user", "username");
+    const reviews = await Review.find().populate("user", "username");
+
     res.json(reviews);
   } catch (err) {
     res.status(500).json({ error: err.message });

@@ -8,13 +8,18 @@ const {
   deleteCar,
 } = require("../controllers/carController");
 const { verifyToken } = require("../middlewares/authMiddleware");
-const { verifyAdmin } = require("../middlewares/roleMiddleware");
+const { verifyAdmin, verifyUser } = require("../middlewares/roleMiddleware");
 const uploadMiddleware = require("../middlewares/uploadMiddleware");
+const { addReview } = require("../controllers/reviewController");
 
-router.post("/cars", verifyToken, verifyAdmin, uploadMiddleware, addCar);
-router.get("/cars", getCars);
-router.get("/cars/:id", getCarById);
-router.patch("/cars/:id", verifyToken, verifyAdmin, updateCar);
-router.delete("/cars/:id", verifyToken, verifyAdmin, deleteCar);
+router.use(verifyToken, verifyAdmin);
+
+router.route("/").get(getCars).post(uploadMiddleware, addCar);
+
+router.route("/:id").get(getCarById).patch(updateCar).delete(deleteCar);
+
+router.get("/user/:id/cars");
+
+router.post("/:id/reviews", verifyToken, verifyUser, addReview);
 
 module.exports = router;
